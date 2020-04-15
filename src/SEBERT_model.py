@@ -520,25 +520,6 @@ for i, (train_fold, test_fold) in enumerate(kf):
     K.clear_session()
 
 
-# Name           Score            Models
-# (1)     -->   0.90182    Last + BiLSTM + TD + DNN3
-# (2)     -->   0.90046    Last + DNN3
-# (3)     -->   0.90585    Last + BiGRU2 + DNN3
-# (4)     -->   0.89549    Baseline
-# (5)     -->   0.90121    CNN + BiLSTM + TD
-# (6)     -->   0.90447    GRU2 + TD + CNN
-# (7)     -->   0.89835    Last + BiGRU2 + DNN2
-# (8)     -->   0.90179    BiGRU2 + Last + DNN3
-# (9)     -->   0.90099    Last + BiGRU2 + TD + DNN3
-
-# (0)     -->   
-
-# (1,4)   -->   0.90200  
-# (1,3)   -->   0.90254
-# (1,2)   -->   0.90239
-
-# (3,5)   -->   0.90361
-# (3,6)   -->   0.90500
 
 
 
