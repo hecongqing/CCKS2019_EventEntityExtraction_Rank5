@@ -1,5 +1,9 @@
 #! -*- coding: utf-8 -*-
 
+import tensorflow as tf
+gpu_options = tf.GPUOptions(allow_growth=True)
+sess = tf.Session(config=tf.ConfigProto(gpu_options=gpu_options)) 
+# os.environ["TF_KERAS"]='1'
 import json
 from tqdm import tqdm
 import os, re
@@ -9,16 +13,23 @@ from keras_bert import load_trained_model_from_checkpoint, Tokenizer
 import codecs
 import gc
 from random import choice
-
-
+import tensorflow.keras.backend as K
 import tensorflow as tf
-gpu_options = tf.GPUOptions(allow_growth=True)
-sess = tf.Session(config=tf.ConfigProto(gpu_options=gpu_options)) 
+from tensorflow.keras.layers import *
+# from tensorflow.keras.engine.topology import Layer
+from tensorflow.keras.models import Model
+from tensorflow.keras.callbacks import *
+from tensorflow.keras.optimizers import Adam,SGD
+from sklearn.model_selection import KFold
 
 
+DEBUG = True
+if DEBUG == True:
+    maxlen = 32
+else:
+    maxlen = 140 # 140
 
 
-maxlen = 140 # 140
 learning_rate = 5e-5 # 5e-5
 min_learning_rate = 1e-5 # 1e-5
 
@@ -222,17 +233,6 @@ class AccumOptimizer(Optimizer):
         config = self.optimizer.get_config()
         K.set_value(self.iterations, iterations)
         return config
-
-#定义模型
-
-import keras.backend as K
-import tensorflow as tf
-from keras.layers import *
-from keras.engine.topology import Layer
-from keras.models import Model
-from keras.callbacks import *
-from keras.optimizers import Adam,SGD
-from sklearn.model_selection import KFold
 
 
 def modify_bert_model_3(): # BiGRU + DNN # 
@@ -453,17 +453,7 @@ for i, (train_fold, test_fold) in enumerate(kf):
     train_ = [train_data[i] for i in train_fold]
     dev_ = [train_data[i] for i in test_fold]
 
-    #model, train_model = modify_bert_model_1()
-    # model, train_model = modify_bert_model_2()
     model, train_model = modify_bert_model_3()
-    # model, train_model = modify_bert_model_4()
-    # model, train_model = modify_bert_model_5()
-    #model, train_model = modify_bert_model_6()
-    # model, train_model = modify_bert_model_7()
-    # model, train_model = modify_bert_model_8()
-    # model, train_model = modify_bert_model_9()
-
-    #model, train_model = modify_bert_model_0()
     
     train_D = data_generator(train_)
     dev_D = data_generator(dev_)

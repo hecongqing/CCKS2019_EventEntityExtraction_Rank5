@@ -72,6 +72,13 @@ https://www.dropbox.com/s/e0ajdb93s2lfdw0/event_type_entity_extract_test.csv?dl=
 
 - keras-bert==0.69.0
 
+- scikit-learn==0.24.2 
+
+- pandas==1.1.5  
+
+- tqdm==4.64.0 
+
+
 # 运行方法
 
 ```shell
@@ -79,4 +86,19 @@ wget https://storage.googleapis.com/bert_models/2018_11_03/chinese_L-12_H-768_A-
 python SEBERT_model.py
 ```
 
+
+# docker上运行
+```shell
+sudo docker pull tensorflow/tensorflow:1.14.0-gpu-py3
+sudo docker run  -dit --restart unless-stopped  --gpus=all --name=evententityextraction tensorflow/tensorflow:1.14.0-gpu-py3
+sudo docker exec -it evententityextraction bash
+apt update
+apt install git
+git clone https://github.com/hecongqing/CCKS2019_EventEntityExtraction_Rank5.git
+cd CCKS2019_EventEntityExtraction_Rank5 
+pip install -r requirements.txt
+wget -P ./CCKS2019_EventEntityExtraction_Rank5/bert https://storage.googleapis.com/bert_models/2018_11_03/chinese_L-12_H-768_A-12.zip
+unzip ./CCKS2019_EventEntityExtraction_Rank5/bert/chinese_L-12_H-768_A-12.zip
+python ./CCKS2019_EventEntityExtraction_Rank5/src/SEBERT_model.py
+```
 
