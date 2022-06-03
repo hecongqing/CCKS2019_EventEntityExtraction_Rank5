@@ -94,11 +94,12 @@ sudo docker run  -dit --restart unless-stopped  --gpus=all --name=evententityext
 sudo docker exec -it evententityextraction bash
 apt update
 apt install git
+apt install wget
 git clone https://github.com/hecongqing/CCKS2019_EventEntityExtraction_Rank5.git
 cd CCKS2019_EventEntityExtraction_Rank5 
 pip install -r requirements.txt
-wget -P ./CCKS2019_EventEntityExtraction_Rank5/bert https://storage.googleapis.com/bert_models/2018_11_03/chinese_L-12_H-768_A-12.zip
-unzip ./CCKS2019_EventEntityExtraction_Rank5/bert/chinese_L-12_H-768_A-12.zip
-python ./CCKS2019_EventEntityExtraction_Rank5/src/SEBERT_model.py
+wget -P ./bert https://storage.googleapis.com/bert_models/2018_11_03/chinese_L-12_H-768_A-12.zip
+unzip -d ./bert ./bert/chinese_L-12_H-768_A-12.zip 
+python ./src/SEBERT_model.py
 ```
 
