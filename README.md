@@ -70,7 +70,7 @@ https://www.dropbox.com/s/e0ajdb93s2lfdw0/event_type_entity_extract_test.csv?dl=
 
 - keras==2.2.4
 
-- keras-bert==0.69.0
+- keras-bert==0.89.0
 
 - scikit-learn==0.24.2 
 
